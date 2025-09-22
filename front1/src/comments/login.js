@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({onLoginSuc}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [mesg, setMesg] = useState('');
 
+
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const response = await fetch('http://101.136.159.233:8080/api/login', {
+      const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ "username":username, "password":password }),
       });
-      const data = await response.text();
-      setMesg(data);
+      const resData = await response.text();
+      if(resData == 'success'){
+        onLoginSuc(username);
+      }else{
+        setMesg(resData);
+      }
     } catch (error) {
+      console.error("Registration failed:", error);
       setMesg('An error occurred. Please try again later.');
     }
   };
@@ -47,6 +54,9 @@ export default function Login() {
         <button type="submit">Login</button>
       </form>
       {mesg && <p className="message">{mesg}</p>}
+      <div className='toggle-link'>
+        <Link to='/register'>to register</Link>
+      </div>
     </div>
   );
 }

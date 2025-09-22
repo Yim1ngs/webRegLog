@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Register(){
     const [username ,setUsername] = useState('');
@@ -8,7 +9,7 @@ export default function Register(){
     async function handleReg(e){
         e.preventDefault();
         try{
-            const response = await fetch("http://101.136.159.233:8080/api/register",{
+            const response = await fetch("/api/register",{
                 method :'POST',
                 headers :{
                     'Content-Type' : 'application/json'
@@ -18,6 +19,7 @@ export default function Register(){
             const resData = await response.text();
             setmesg(resData);
         }catch(error){
+            console.error("Registration failed:", error);
             setmesg('something wrong');
         }
     };
@@ -37,6 +39,9 @@ export default function Register(){
                 <button type="submit">Register</button>
             </form>
             {mesg &&<p className="message">{mesg}</p>}
+            <div className="toggle-link">
+                <Link to='login'>already have a account?</Link>
+            </div>
         </div>
     )
 

@@ -88,3 +88,28 @@ button:hover {
   text-align: center;
   color: #d9534f;
 }
+.welcome-container {
+  text-align: center;
+}
+.welcome-message {
+  font-size: 1.5rem;
+  color: #333;
+}
+.logout-button {
+  margin-top: 1rem;
+  background-color: #dc3545;
+}
+.logout-button:hover {
+  background-color: #c82333;
+}
+.toggle-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+.toggle-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+.toggle-link a:hover {
+  text-decoration: underline;
+}
